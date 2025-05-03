@@ -1,0 +1,540 @@
+/* src/styles/global.css */
+
+/* --- Variables CSS pour le thème Jour/Nuit --- */
+:root {
+    /* Couleurs par défaut (mode Jour) */
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --sidebar-bg-color: #2c3e50;
+    --sidebar-text-color: #ecf0f1;
+    --sidebar-name-color: #3498db;
+    --sidebar-title-color: #bdc3c7;
+    --sidebar-link-color: #3498db;
+    --sidebar-border-color: #444;
+    --main-bg-color: #fff;
+    --section-title-color: #2c3e50;
+    --section-border-color: #eee;
+    --section-title-border-color: #3498db;
+    --item-title-color: #34495e;
+    --list-bullet-color: #3498db;
+    --skill-tag-bg-color: #3498db;
+    --skill-tag-text-color: white;
+}
+
+/* --- Styles généraux utilisant les variables --- */
+body {
+    margin: 0;
+    font-family: sans-serif; /* Ou une autre police de ton choix */
+    line-height: 1.6;
+    background-color: var(--background-color); /* Utilise la variable */
+    color: var(--text-color); /* Utilise la variable */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Animation douce */
+    word-wrap: break-word; /* Empêche les mots longs de dépasser sur petits écrans */
+    overflow-wrap: break-word; /* Empêche les mots longs de dépasser sur petits écrans */
+}
+
+*, *::before, *::after {
+    box-sizing: border-box; /* Simplifie le calcul des tailles avec padding/border */
+}
+
+#root {
+    display: flex;
+    min-height: 100vh; /* La racine de l'app prend au moins toute la hauteur de la vue */
+    width: 100%;
+}
+
+/* --- Layout Principal (Sidebar + Contenu) --- */
+.app-container {
+    display: flex; /* Utilise flexbox pour aligner sidebar et contenu côte à côte par défaut */
+    width: 100%;
+    /* max-width: 1200px; /* Optionnel: Limiter la largeur maximale du CV */
+    /* margin: 0 auto; /* Optionnel: Centrer le CV si max-width est utilisé */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optionnel: Ajouter une ombre */
+    background-color: var(--main-bg-color); /* Utilise la variable */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar {
+    width: 300px; /* Largeur fixe pour la sidebar sur grand écran */
+    background-color: var(--sidebar-bg-color); /* Utilise la variable */
+    color: var(--sidebar-text-color); /* Utilise la variable */
+    padding: 20px;
+    flex-shrink: 0; /* Empêche la sidebar de rétrécir sur grand écran */
+    text-align: center; /* Centre le contenu texte et l'image */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-y: auto; /* Ajoute défilement si contenu sidebar est long */
+}
+
+.main-content {
+    flex-grow: 1; /* Le contenu principal prend l'espace restant */
+    padding: 20px;
+    overflow-y: auto; /* Ajoute une barre de défilement si le contenu dépasse */
+    background-color: var(--main-bg-color); /* Utilise la variable */
+    transition: background-color 0.3s ease;
+}
+
+/* --- Styles de la Sidebar --- */
+.sidebar-photo-container {
+    width: 150px; /* Taille du conteneur pour la photo */
+    height: 150px;
+    margin: 0 auto 20px auto; /* Centre le conteneur et ajoute un espace en bas */
+    border-radius: 50%; /* Rend le conteneur circulaire */
+    overflow: hidden; /* Cache les parties de l'image qui dépassent du cercle */
+    border: 5px solid var(--sidebar-name-color); /* Utilise une variable pour la bordure */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optionnel: Ajoute une ombre à la photo */
+}
+
+.sidebar-photo {
+    display: block; /* Empêche l'espace blanc sous l'image */
+    width: 100%; /* L'image prend toute la largeur du conteneur */
+    height: 100%; /* L'image prend toute la hauteur du conteneur */
+    object-fit: cover; /* Redimensionne l'image pour couvrir le conteneur sans déformation */
+}
+
+.sidebar-name {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: var(--sidebar-name-color); /* Couleur pour le nom */
+}
+
+.sidebar-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1em;
+    color: var(--sidebar-title-color); /* Couleur pour le titre */
+}
+
+.sidebar-contact {
+    text-align: left; /* Alignez le texte de contact à gauche */
+    margin-top: 20px;
+    border-top: 1px solid var(--sidebar-border-color); /* Ligne de séparation */
+    padding-top: 20px;
+}
+
+.sidebar-contact h3 {
+    margin-top: 0;
+    color: var(--sidebar-text-color);
+    margin-bottom: 15px;
+    text-align: center; /* Centre le titre Contact */
+}
+
+.sidebar-contact p {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    display: flex; /* Utilise flexbox pour aligner icône et texte si tu utilises des icônes */
+    align-items: center; /* Centre verticalement icône et texte */
+}
+
+.sidebar-contact p svg { /* Style pour les icônes si tu utilises react-icons */
+    margin-right: 10px;
+    color: var(--sidebar-link-color); /* Couleur des icônes */
+}
+
+.sidebar-contact a {
+    color: var(--sidebar-link-color); /* Couleur des liens */
+    text-decoration: none; /* Supprime le soulignement par défaut */
+}
+
+.sidebar-contact a:hover {
+    text-decoration: underline; /* Souligne au survol */
+}
+
+/* --- Styles des Sections Principales --- */
+.cv-section {
+    margin-bottom: 40px; /* Espace entre les sections */
+    padding-bottom: 20px; /* Espace interne en bas de chaque section */
+    border-bottom: 1px solid var(--section-border-color); /* Ligne de séparation légère */
+}
+
+.cv-section:last-child {
+    border-bottom: none; /* Pas de bordure après la dernière section */
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.cv-section h2 {
+    color: var(--section-title-color); /* Couleur des titres de section */
+    border-bottom: 2px solid var(--section-title-border-color); /* Ligne décorative sous le titre */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Styles pour les listes (Diplômes, Expériences, Compétences) */
+.cv-section ul {
+    list-style: none; /* Supprime les puces par défaut */
+    padding: 0;
+    margin: 0;
+}
+
+.cv-section li {
+    margin-bottom: 15px;
+    padding-left: 20px;
+    position: relative; /* Pour positionner une puce personnalisée */
+}
+
+.cv-section li::before {
+    content: '\2022'; /* Code pour une puce (rond) */
+    color: var(--list-bullet-color); /* Couleur de la puce */
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em; /* Décale la puce vers la gauche */
+    position: absolute;
+    left: 0;
+}
+
+/* Styles spécifiques pour l'expérience ou la formation si nécessaire */
+.experience-item, .education-item {
+    margin-bottom: 20px;
+}
+
+.experience-item h3, .education-item h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: var(--item-title-color); /* Couleur des sous-titres */
+}
+
+.experience-item p, .education-item p {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 0.95em;
+}
+
+.skills-list {
+    display: flex; /* Optionnel: Afficher les compétences en tags */
+    flex-wrap: wrap; /* Permet aux tags de passer à la ligne si l'espace manque */
+    gap: 10px; /* Espace entre les tags */
+    padding: 0; /* S'assure qu'il n'y a pas de padding de liste */
+    list-style: none; /* S'assure qu'il n'y a pas de puce */
+}
+
+.skill-tag {
+    background-color: var(--skill-tag-bg-color);
+    color: var(--skill-tag-text-color);
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+/* --- Styles du bouton PDF --- */
+.pdf-download-container {
+    text-align: center; /* Centre le bouton */
+    margin-bottom: 30px; /* Espace sous le bouton */
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--section-border-color); /* Ligne de séparation */
+}
+
+body.dark-mode .pdf-download-container { /* Ajuste la bordure en mode sombre */
+    border-bottom-color: var(--sidebar-border-color);
+}
+
+
+.download-pdf-button {
+    background-color: #2ecc71; /* Vert pour l'action de téléchargement */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.download-pdf-button:hover {
+    background-color: #27ae60;
+}
+
+/* Styles spécifiques au bouton PDF en mode sombre si besoin */
+body.dark-mode .download-pdf-button {
+    background-color: #27ae60; /* Ajuste la couleur en mode sombre */
+}
+
+body.dark-mode .download-pdf-button:hover {
+    background-color: #229954;
+}
+
+/* --- Styles du Theme Switcher --- */
+.theme-switcher {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.theme-toggle-button {
+    background-color: var(--sidebar-name-color); /* Utilise une variable pour la couleur de fond */
+    color: var(--sidebar-text-color); /* Utilise une variable pour la couleur du texte */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Animation douce */
+}
+
+.theme-toggle-button:hover {
+     background-color: #2980b9; /* Assombrir au survol */
+}
+
+
+/* Styles spécifiques au bouton en mode sombre */
+body.dark-mode .theme-toggle-button {
+    background-color: var(--sidebar-link-color); /* Utilise une variable en mode sombre */
+    color: var(--skill-tag-text-color); /* Utilise une autre variable */
+}
+
+body.dark-mode .theme-toggle-button:hover {
+    background-color: #e67e22; /* Assombrir au survol */
+}
+
+
+/* ========================================================================= */
+/* --- MEDIA QUERIES POUR LA RESPONSIVITE --- */
+/* ========================================================================= */
+
+/* Applique ces styles pour les écrans de 768px de large ou moins (tablettes, téléphones) */
+@media (max-width: 768px) {
+
+    /* --- Layout Principal (Sidebar + Contenu) --- */
+    .app-container {
+        flex-direction: column; /* Empile la sidebar et le contenu verticalement */
+        box-shadow: none; /* Retire l'ombre pour un affichage plus simple sur mobile */
+    }
+
+    .sidebar {
+        width: 100%; /* La sidebar prend toute la largeur disponible */
+        height: auto; /* La hauteur devient automatique selon le contenu */
+        padding: 15px; /* Ajuste le padding pour les petits écrans */
+        flex-shrink: 1; /* Permet à la sidebar de rétrécir si besoin (même si width: 100% le rend moins pertinent ici) */
+        text-align: center; /* Centre tout le contenu de la sidebar */
+    }
+
+    .main-content {
+        width: 100%; /* Le contenu principal prend toute la largeur */
+        padding: 15px; /* Ajuste le padding */
+        overflow-y: visible; /* Désactive le défilement spécifique au main-content, laisse body gérer si nécessaire */
+    }
+
+    /* --- Ajustements dans la Sidebar sur petits écrans --- */
+    .sidebar-photo-container {
+        width: 100px; /* Réduit la taille de la photo */
+        height: 100px;
+        margin: 10px auto; /* Centre la photo avec moins d'espace */
+         border-width: 3px; /* Réduit l'épaisseur de la bordure */
+    }
+
+    .sidebar-name {
+        font-size: 1.5em; /* Ajuste la taille du nom */
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .sidebar-title {
+        font-size: 0.9em; /* Ajuste la taille du titre */
+        margin-bottom: 15px;
+    }
+
+    .sidebar-contact {
+        text-align: center; /* Centre le texte de contact */
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid var(--sidebar-border-color); /* Ligne de séparation */
+    }
+
+    .sidebar-contact h3 {
+         text-align: center; /* S'assure que le titre Contact reste centré */
+         margin-bottom: 10px;
+    }
+
+     .sidebar-contact p {
+        /* Si tu utilises flexbox pour aligner icône et texte dans <p>, centre-les */
+        justify-content: center;
+        margin-bottom: 5px; /* Réduit l'espace entre les lignes de contact */
+     }
+
+     .theme-switcher {
+        margin-top: 20px; /* Ajuste l'espace au-dessus du bouton thème */
+     }
+
+
+    /* --- Ajustements dans le Contenu Principal sur petits écrans --- */
+    .cv-section {
+        margin-bottom: 30px; /* Réduit l'espace entre les sections */
+        padding-bottom: 15px;
+    }
+
+    .cv-section h2 {
+        font-size: 1.4em; /* Ajuste la taille des titres de section */
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+    }
+
+    .cv-section li {
+         margin-bottom: 10px; /* Réduit l'espace entre les éléments de liste */
+         padding-left: 15px; /* Ajuste le padding à gauche */
+    }
+
+    .cv-section li::before {
+         width: 0.8em; /* Ajuste la puce si nécessaire */
+         margin-left: -0.8em;
+    }
+
+
+    .experience-item, .education-item {
+        margin-bottom: 15px; /* Réduit l'espace entre les blocs expérience/formation */
+    }
+
+     .experience-item h3, .education-item h3 {
+         font-size: 1em; /* Ajuste la taille des sous-titres */
+     }
+
+    .experience-item p, .education-item p {
+        font-size: 0.9em; /* Ajuste la taille du texte descriptif */
+    }
+
+
+    .skills-list {
+        justify-content: center; /* Centre les tags de compétences si flex-wrap est utilisé */
+        gap: 8px; /* Réduit l'espace entre les tags */
+    }
+
+    .skill-tag {
+        padding: 4px 8px; /* Ajuste le padding des tags */
+        font-size: 0.85em; /* Ajuste la taille du texte des tags */
+    }
+
+     /* Ajustements du bouton PDF */
+    .pdf-download-container {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
+
+    .download-pdf-button {
+         padding: 10px 15px; /* Ajuste le padding du bouton PDF */
+         font-size: 0.9em; /* Ajuste la taille du texte du bouton PDF */
+    }
+}
+
+/* Applique ces styles pour les écrans de 480px de large ou moins (très petits téléphones) */
+@media (max-width: 480px) {
+    body {
+        font-size: 0.9em; /* Réduit légèrement la taille de police générale pour les tout petits écrans */
+    }
+
+    .sidebar {
+         padding: 10px; /* Réduit encore un peu le padding de la sidebar */
+    }
+     .main-content {
+         padding: 10px; /* Réduit encore un peu le padding du contenu principal */
+     }
+
+
+    .sidebar-photo-container {
+        width: 80px; /* Réduit encore la taille de la photo */
+        height: 80px;
+        margin-bottom: 10px;
+    }
+
+     .sidebar-name {
+         font-size: 1.3em;
+         margin-bottom: 3px;
+     }
+
+     .sidebar-title {
+         font-size: 0.85em;
+         margin-bottom: 10px;
+     }
+
+    .sidebar-contact {
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+    .sidebar-contact h3 {
+        margin-bottom: 8px;
+    }
+     .sidebar-contact p {
+         font-size: 0.8em;
+     }
+
+
+     .cv-section {
+         margin-bottom: 20px; /* Réduit l'espace entre les sections */
+         padding-bottom: 10px;
+     }
+
+     .cv-section h2 {
+         font-size: 1.2em; /* Réduit la taille des titres de section */
+         padding-bottom: 5px;
+         margin-bottom: 10px;
+     }
+
+     .cv-section li {
+         margin-bottom: 8px;
+         padding-left: 12px;
+         font-size: 0.9em;
+     }
+     .cv-section li::before {
+         width: 0.7em;
+         margin-left: -0.7em;
+     }
+
+      .experience-item, .education-item {
+         margin-bottom: 10px;
+     }
+      .experience-item h3, .education-item h3 {
+          font-size: 0.9em;
+      }
+     .experience-item p, .education-item p {
+         font-size: 0.85em;
+     }
+
+
+     .skills-list {
+         gap: 5px; /* Réduit l'espace entre les tags */
+     }
+     .skill-tag {
+         padding: 3px 6px;
+         font-size: 0.8em;
+     }
+
+    .pdf-download-container {
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+    .download-pdf-button {
+        padding: 8px 12px;
+        font-size: 0.8em;
+    }
+
+     .theme-switcher {
+         margin-top: 15px;
+     }
+      .theme-toggle-button {
+         padding: 8px 12px;
+         font-size: 0.8em;
+      }
+
+}
+
+/* --- Styles pour le mode Nuit --- */
+body.dark-mode {
+    --background-color: #1e1e1e;
+    --text-color: #ecf0f1;
+    --sidebar-bg-color: #34495e;
+    --sidebar-text-color: #ecf0f1;
+    --sidebar-name-color: #f1c40f;
+    --sidebar-title-color: #bdc3c7;
+    --sidebar-link-color: #f1c40f;
+    --sidebar-border-color: #555;
+    --main-bg-color: #2c3e50;
+    --section-title-color: #ecf0f1;
+    --section-border-color: #555;
+    --section-title-border-color: #f1c40f;
+    --item-title-color: #bdc3c7;
+    --list-bullet-color: #f1c40f;
+    --skill-tag-bg-color: #f1c40f;
+    --skill-tag-text-color: #333;
+}
+
+/* Les styles spécifiques au mode sombre qui ne sont pas gérés par les variables peuvent être ajoutés ici si besoin */
+/* Par exemple, si tu as des ombres ou des bordures fixes qui doivent changer */
+/* body.dark-mode .app-container { box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); } */
+/* body.dark-mode .sidebar-photo-container { border-color: var(--sidebar-link-color); } */
